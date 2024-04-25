@@ -1,0 +1,90 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is a simple API documentation for the Twitter scraping service.",
+      "version": "1.0.0",
+      "title": "Twitter Scraper API",
+      "contact": {
+        "email": "contact@example.com"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "tweets",
+        "description": "Operations about tweets"
+      }
+    ],
+    "schemes": ["http"],
+    "paths": {
+      "/api/tweets": {
+        "get": {
+          "tags": ["tweets"],
+          "summary": "List all tweets",
+          "description": "Returns a list of tweets",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Maximum number of items per page",
+              "required": false,
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Tweet"
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Tweet": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tweet_text": {
+            "type": "string"
+          },
+          "image_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "has_video": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+  
