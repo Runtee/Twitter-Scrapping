@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports Dashboard</title>
+    <link href="/output.css" rel="stylesheet">
+
+</head>
+<body class="bg-gray-200">
+    <div class="min-h-screen flex flex-col">
+        <%- include('includes/header admin'); -%> 
+
+        <div class="flex-grow p-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white p-4 shadow rounded-lg">
+                    <h2 class="font-bold text-lg">Demographic Data</h2>
+                    <p class="mb-4">View demographic statistics across various metrics.</p>
+                    <a href="/demographic-report" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">View Report</a>
+                </div>
+                <div class="bg-white p-4 shadow rounded-lg">
+                    <h2 class="font-bold text-lg">Application Statistics</h2>
+                    <p class="mb-4">Detailed stats on application submissions and approvals.</p>
+                    <a href="/application-stats-report" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">View Report</a>
+                </div>
+                <div class="bg-white p-4 shadow rounded-lg">
+                    <h2 class="font-bold text-lg">Custom Reports</h2>
+                    <p class="mb-4">Generate reports based on custom criteria.</p>
+                    <a href="/custom-report-generator" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Generate</a>
+                </div>
+            </div>
+        </div>
+        <%- include('includes/footer'); -%> 
+
+    </div>
+</body>
+</html>

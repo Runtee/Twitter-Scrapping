@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Review</title>
+    <link href="/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200  bg-[url('images/bg.jpg')] bg-repeat-x" >
+    <header class="bg-blue-500 text-white p-4 flex">
+    <h1 class="text-xl mr-auto">Administrator Dashboard</h1>
+    <ul class="flex gap-4">
+        <li>Manage users</li> 
+        <li>View reports</li> 
+        <li>Settings </li> 
+    </ul>
+</header>
+    <div class="min-h-screen flex items-center justify-center">
+        
+        <div class="bg-white p-8 rounded-lg shadow-lg ">
+            <h1 class="text-xl font-bold mb-4">Review Application</h1>
+            <div class="mb-4">
+                <p><strong>ApplicantId:</strong> <%= applicantId %></p>
+                <p><strong>Applicant:</strong> <%= applicant %></p>
+                <p><strong>Date of Birth:</strong> <%= dob %></p>
+                <p><strong>Email:</strong> <%= email %></p>
+            </div>
+            <div class="flex justify-between">
+                <form action="/approve-application" method="POST">
+                    <input type="hidden" name="applicationId" value="<%= applicantId %>">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Approve</button>
+                </form>
+                <form action="/reject-application" method="POST">
+                    <input type="hidden" name="applicationId" value="<%= applicantId %>">
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Reject</button>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

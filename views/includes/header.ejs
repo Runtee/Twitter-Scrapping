@@ -1,0 +1,55 @@
+<style>
+  body {
+      background-image: url('/images/bg2.jpg'); /* Replace 'https://example.com/pattern.jpg' with the URL of your desired background pattern image */
+      background-repeat: repeat; /* Adjust as needed */
+  }
+</style>
+<header class="bg-blue-800 text-white p-4 flex">
+  <h1 class="text-xl mr-auto"><a href="/dashboard"> User Dashboard</a></h1>
+  <h1 class="mr-3"><a href="/profile"> <%=personalInformation.FirstName %> <%=personalInformation.LastName %></a></h1>
+  <div class="relative w-40">
+      <button id="user-menu-button" type="button" class="flex text-sm bg-black rounded-full md:me-0 focus:outline-none focus:ring-4 focus:ring-gray-300" onclick="toggleDropdown()">
+          <span class="sr-only">Open user menu</span>
+          <a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person"
+              viewBox="0 0 16 16">
+              <path
+                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+            </svg> </a>      </button>
+      <!-- Dropdown menu -->
+      <div id="user-menu" class="hidden w-40 z-50 my-4 text-base -left-[130px] top-6 list-none bg-white divide-y divide-gray-100 rounded-lg shadow" style="position: absolute; right: 20px;">
+          <ul class="py-1">
+              <li>
+                  <a href="/dashboard/changepassword" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Change Password</a>
+              </li>
+              <li>
+                <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+            </li>
+          </ul>
+      </div>
+  </div>
+</header>
+
+<script>
+  function toggleDropdown() {
+      var dropdown = document.getElementById("user-menu");
+      if (dropdown.classList.contains('hidden')) {
+          dropdown.classList.remove('hidden');
+      } else {
+          dropdown.classList.add('hidden');
+      }
+  }
+
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+      if (!event.target.matches('#user-menu-button')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          for (var i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (!openDropdown.classList.contains('hidden')) {
+                  openDropdown.classList.add('hidden');
+              }
+          }
+      }
+  }
+</script>

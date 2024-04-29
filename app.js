@@ -1,49 +1,47 @@
+const bodyParser = require('body-parser');
 const express = require('express');
-const { Pool } = require('pg');
-const { scrapeTwitter } = require('./scrapper');
-const nodemailer = require('nodemailer');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
-
+const path = require('path');
+const expressSession = require('express-session');
 const app = express();
-const pool = new Pool(); // Configure your Postgres connection parameters
+const indexRoutes = require('./router');
+const { sequelize } = require('./models/models');
+const flash = require('connect-flash')
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user:process.env.email,
-        pass: process.env.password
-    }
-});
+app.use(flash());
 
-async function periodicScrape() {
-    const tweets = await scrapeTwitter();
-    for (const tweet of tweets) {
-        const { textContent, images, has_video } = tweet;
-        const queryText = 'INSERT INTO tweets(tweet_text, image_paths, has_video) VALUES($1, $2, $3) RETURNING *';
-        const res = await pool.query(queryText, [textContent, images, has_video]);
 
-        if (has_video) {
-            transporter.sendMail({
-                from: process.env.email,
-                to: 'noniekwo@gmail.com',
-                subject: 'New Video Post Detected',
-                text: 'A new post with video has been detected and saved.'
-            });
-        }
+app.use(expressSession({
+    secret: 'danceingcat',
+    saveUninitialized: true,
+    resave: true
+}));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+// app.use(flash());
+app.use(indexRoutes);
+
+
+app.use((req, res, next) => {
+    res.status(404).render('404', { pageTitle: 'Page Not Found' });
+next()
+})
+const connect = async() =>{
+    try {
+        await sequelize.authenticate()
+        await sequelize.sync({alter: false})
+        console.log('connected to db')
+        return sequelize
+    } catch (error) {
+        console.log(error)
+        return({message: error.message})
     }
 }
 
-app.get('/api/tweets', async (req, res) => {
-    const { page = 1, limit = 10 } = req.query;
-    const offset = (page - 1) * limit;
-    const result = await pool.query('SELECT * FROM tweets ORDER BY created_at DESC LIMIT $1 OFFSET $2', [limit, offset]);
-    res.json(result.rows);
-});
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+connect()
 
 app.listen(3000, () => {
-    console.log('Server running on port 3000');
-    setInterval(periodicScrape, 3600000); // Run scraping every hour
+    console.log('listening on port 3000');
 });

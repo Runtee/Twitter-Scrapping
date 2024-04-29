@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200  bg-[url('images/bg2.jpg')] bg-repeat-x">
+    <div class="min-h-screen flex flex-col">
+        <%- include('includes/header'); -%> 
+
+        <div class="flex-grow p-5">
+            <h2 class="text-xl font-semibold">Welcome back <%=personalInformation.FirstName %></h2>
+            <h2 class="text-lg font-bold">Your Information</h2>
+            <div class="bg-white p-4 mt-3 shadow rounded-lg">
+                <p><strong>Application Status:</strong> <%= applicationStatus %></p>
+                <p><strong>Messages:</strong> You have <%= messageCount %> new messages</p>
+                <p><strong>Last Login:</strong> <%= lastLogin %></p>
+            </div>
+            
+            
+            <div class="mt-6">
+                <h3 class="text-lg font-bold mb-2">Available Actions</h3>
+                <a href="/profile" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View Profile</a>
+                <% if (applicationStatus=="None") { %>
+                    <a href="/application-form" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mt-3">New ID Card Application</a>
+                <% } %>
+                <% if (applicationStatus=="pending") { %>
+                    <a href="/application-form" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mt-3">View Application</a>
+                <% } %>
+                <% if (applicationStatus=="success") { %>
+                    <a href="/id-card/<%=personalInformation.UserID %>" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mt-3">View ID Card</a>
+                <% } %>
+          </div>
+        </div>
+        <footer class="bg-gray-800 text-white text-center p-4">
+            © 2024 NYSC Management System
+        </footer>
+    </div>
+</body>
+</html>

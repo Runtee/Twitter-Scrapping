@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID Card</title>
+    <style>
+        .id-card {
+            width: 350px;
+            font-family: 'Arial', sans-serif;
+        }
+        .id-card-header {
+            background-color: #2a3eb1;
+            color: white;
+            padding: 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .id-card-body {
+            background-color: white;
+            padding: 15px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-top: 5px solid #2a3eb1;
+        }
+        .id-card-footer {
+            background-color: #2a3eb1;
+            color: white;
+            padding: 10px;
+            font-size: 10px;
+            text-align: center;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+        .id-card-footer p {
+            margin: 0;
+        }
+    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[url('/images/bg2.jpg')] bg-repeat-x">
+    <div class="min-h-screen flex flex-col">
+        <%- include('includes/header'); -%> 
+
+        <div class="flex items-center justify-center h-screen">
+            <div class="id-card shadow-lg">
+                <div class="id-card-header text-center">
+                    <h3 class="text-lg font-bold">NYSC</h3>
+                    <p>Corps Member</p> <!-- Assuming 'role' is part of the user object -->
+                </div>
+                <div class="id-card-body">
+                    <div class="flex justify-center mb-4">
+                        <div class="rounded-full h-24 w-24 bg-gray-300 flex items-center justify-center">
+                            <!-- Use the user's photo if available -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi rounded-full bi-person"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+          </svg> </a>
+                            <!-- <img src="" alt="Profile Photo" class="rounded-full"> -->
+                        </div>
+                    </div>
+                    <h5 class="text-center font-bold mb-2"><%= personalInformation.FirstName %> <%= personalInformation.LastName %></h5>
+                    <div class="text-sm">
+                        <p><strong>ID No:</strong> <%= card.CardNumber %></p>
+                        <p><strong>D.O.B:</strong> <%= new Date(personalInformation.DOB).toISOString().slice(0, 10) %></p>
+                        <p><strong>State:</strong> <%= personalInformation.State || 'Enugu' %></p>
+                        <p><strong>Phone:</strong> <%= personalInformation.Phone %></p>
+                        <p><strong>E-mail:</strong> <%= personalInformation.email %></p>
+                    </div>
+                </div>
+                <div class="id-card-footer">
+                    <p>Terms & Conditions: It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                </div>
+            </div>
+            <button onclick="window.print()" class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Print ID Card</button>
+        </div>
+    </div>
+</body>
+</html>
+

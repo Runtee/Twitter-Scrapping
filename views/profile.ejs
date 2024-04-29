@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="/output.css" rel="stylesheet">
+
+</head>
+<body class="bg-gray-200">
+    <%- include('includes/header'); -%> 
+
+    <div class="flex items-center justify-center my-5">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-[70%]">
+            <h1 class="text-xl font-bold mb-4">User Profile</h1>
+            <form action="/update-profile" method="POST" class="grid grid-cols-2 gap-4">
+                <div class="col-span-2">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input readonly type="text" id="name" name="name" value="<%= personalInformation.FirstName %> <%= personalInformation.LastName %>" class="mt-1 mb-6 p-2 w-full border rounded-md" required>
+                </div>
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input readonly type="text" id="username" name="username" value="<%= user.Username %>" class="mt-1 mb-4 p-2 w-full border rounded-md" readonly>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input readonly type="email" id="email" name="email" value="<%= user.Email %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div>
+                    <label for="date-graduated" class="block text-sm font-medium text-gray-700">Date Graduated</label>
+                    <input readonly type="date" id="date-graduated" name="date-graduated" value="<%= personalInformation.DateGraduated %>" class="mt-1 mb-4 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                    <input readonly type="text" id="country" name="country" value="<%= personalInformation.Country %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div class="col-span-2">
+                    <label for="school" class="block text-sm font-medium text-gray-700">School Attended</label>
+                    <input readonly type="text" id="school" name="school" value="<%= personalInformation.School %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div>
+                    <label for="state-of-origin" class="block text-sm font-medium text-gray-700">State of Origin</label>
+                    <input readonly type="text" id="state-of-origin" name="state-of-origin" value="<%= personalInformation.StateOfOrigin %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div>
+                    <label for="lga" class="block text-sm font-medium text-gray-700">Gender</label>
+                    <input readonly type="text" id="lga" name="lga" value="<%= personalInformation.Gender %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div class="col-span-2">
+                    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                    <input readonly type="text" id="address" name="address" value="<%= personalInformation.Address %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div class="col-span-2">
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input readonly type="tel" id="phone" name="phone" value="<%= personalInformation.Phone %>" class="mt-1 mb-6 p-2 w-full border rounded-md" required>
+                </div>
+                <!-- <div class="col-span-2">
+                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Update Profile</button>
+                </div> -->
+            </form>
+        </div>
+    </div>
+    <footer class="bg-gray-800 text-white text-center p-4">
+        © 2024 NYSC Management System
+    </footer>
+</body>
+</html>

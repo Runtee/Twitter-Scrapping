@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Issuance</title>
+    <link href="/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-200  bg-[url('images/bg.jpg')] bg-repeat-x" >
+    <%- include('includes/header admin'); -%> 
+
+    <div class="min-h-[84vh] flex items-center justify-center flex-col gap-5">
+        <a href="/card-issuance" class="pb-10 text-blue-500 font-bold underline">View Pending Card Application</a>
+
+        <div class="bg-white p-8 rounded-lg shadow-lg ">
+            <h1 class="text-xl font-bold mb-4">Card Issuance Tracking</h1>
+            <table class="min-w-full table-auto">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-2 text-left">ID</th>
+                        <th class="px-4 py-2 text-left">Name</th>
+                        <th class="px-4 py-2 text-left">Card Number</th>
+                        <th class="px-4 py-2 text-left">Issue Date</th>
+                        <th class="px-4 py-2 text-left">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% cards.forEach(card => { %>
+                        <tr>
+                            <td class="border px-4 py-2"><%= card.CardID %></td>
+                            <td class="border px-4 py-2"><%= card.Application.User.PersonalInformation.FirstName + ' ' + card.Application.User.PersonalInformation.LastName %> %></td>
+                            <td class="border px-4 py-2"><%= card.CardNumber %></td>
+                            <td class="border px-4 py-2"><%= new Date(card.IssueDate).toISOString().slice(0, 10) %></td>
+                            <td class="border px-4 py-2">Active</td>
+            
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="bg-gray-800 text-white text-center p-4">
+        © 2024 NYSC Management System
+    </footer>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="/output.css" rel="stylesheet">
+
+</head>
+<body class="bg-gray-200">
+    <%- include('includes/header admin'); -%> 
+
+    <div class="flex items-center justify-center my-5">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-3xl">
+            <h1 class="text-xl font-bold mb-4">Edit User</h1>
+            <form action="/edit-user/<%=user.UserID %>" method="POST" class="grid grid-cols-2 gap-4">
+                <div class="col-span-2">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="name" name="name" value="<%= user.FirstName %> <%= user.LastName %>" class="mt-1 mb-6 p-2 w-full border rounded-md" required>
+                </div>
+                <div>
+                    <label for="date-graduated" class="block text-sm font-medium text-gray-700">Date Graduated</label>
+                    <input type="date" id="date-graduated" name="date-graduated" value="<%= user.DateGraduated %>" class="mt-1 mb-4 p-2 w-full border rounded-md">
+                </div>
+                <div>
+                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                    <input type="text" id="country" name="country" value="<%= user.Country %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div class="col-span-2">
+                    <label for="school" class="block text-sm font-medium text-gray-700">School Attended</label>
+                    <input type="text" id="school" name="school" value="<%= user.School %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div>
+                    <label for="state-of-origin" class="block text-sm font-medium text-gray-700">State of Origin</label>
+                    <input type="text" id="state-of-origin" name="state_of_origin" value="<%= user.StateOfOrigin %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div>
+                    <label for="lga" class="block text-sm font-medium text-gray-700">Gender</label>
+                    <input type="text" id="lga" name="gender" value="<%= user.Gender %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div class="col-span-2">
+                    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                    <input type="text" id="address" name="address" value="<%= user.Address %>" class="mt-1 mb-4 p-2 w-full border rounded-md" required>
+                </div>
+                <div class="col-span-2">
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" value="<%= user.Phone %>" class="mt-1 mb-6 p-2 w-full border rounded-md" required>
+                </div>
+                <div class="col-span-2">
+                    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Update Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer class="bg-gray-800 text-white text-center p-4">
+        © 2024 NYSC Management System
+    </footer>
+</body>
+</html>

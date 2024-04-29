@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Report Generator</title>
+    <link href="/output.css" rel="stylesheet">
+</head>
+<body class="">
+    <%- include('includes/header admin'); -%> 
+
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-lg">
+            <h1 class="text-xl font-bold mb-4">Generate Custom Report</h1>
+            <form action="/generate-custom-report" method="POST">
+                <label for="reportType" class="block text-sm font-medium text-gray-700">Report Type</label>
+                <select id="reportType" name="reportType" class="mt-1 mb-4 p-2 w-full border rounded-md">
+                    <option value="demographic">Demographic</option>
+                    <option value="applications">Applications</option>
+                    <option value="identityCards">Identity Cards</option>
+                </select>
+
+                <label for="dateFrom" class="block text-sm font-medium text-gray-700">From</label>
+                <input type="date" id="dateFrom" name="dateFrom" class="mt-1 mb-4 p-2 w-full border rounded-md">
+
+                <label for="dateTo" class="block text-sm font-medium text-gray-700">To</label>
+                <input type="date" id="dateTo" name="dateTo" class="mt-1 mb-6 p-2 w-full border rounded-md">
+
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Generate Report</button>
+            </form>
+        </div>
+    </div>
+    <%- include('includes/footer'); -%> 
+
+</body>
+</html>
